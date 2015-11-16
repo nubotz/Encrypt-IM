@@ -1,0 +1,4 @@
+1. javac *.java
+2. java Create_user
+3. java ChatServer
+4. java ChatClient
