@@ -48,7 +48,7 @@ public class ChatServer {
 			public void run(){
 			try{
 			   BufferedReader in = new BufferedReader (new InputStreamReader (socket.getInputStream ( )));
-			   String clientInput, clientInput2;
+			   String clientInput, clientInput2, clientInput3;
 			   
 			   	String ClientID = in.readLine ( );
 					
@@ -60,13 +60,17 @@ public class ChatServer {
 			   while (true) {
 					clientInput = in.readLine ( );
 					clientInput2 = in.readLine ( );
+					clientInput3 = in.readLine ( );
+					
 					if (clientInput == null)
 						break;
 					//process input and pipe to target user
 					String[] parts = clientInput.split(";;",2);
 					
-					new PrintWriter (userMap.get(parts[1]).getOutputStream ( ),true).println(parts[0]+";;"+clientInput2);
-					System.out.println("sender: "+parts[0] + "   receiver: "+parts[1] + "   encrypted message: "+clientInput2);
+					new PrintWriter (userMap.get(parts[1]).getOutputStream ( ),true).println(parts[0]+";;"+clientInput2+";;"+clientInput3);
+					System.out.println("sender: "+parts[0] + "   receiver: "+parts[1] );
+					System.out.println("encrypted message: "+clientInput2);
+					System.out.println("encrypted sha1: "+clientInput3);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
